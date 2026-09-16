@@ -1,0 +1,37 @@
+<a routerLink="/recipes-list">&larr; Volver a la lista</a>
+
+@if (recipe) {
+  <div class="detail-card">
+    <img [src]="recipe.image" [alt]="recipe.name" />
+    <h2>{{ recipe.id }} - {{ recipe.name }}</h2>
+    <p>Dificultad: {{ recipe.difficulty }}</p>
+
+    <div class="chips">
+      @for (tag of recipe.tags; track tag) {
+        <span class="chip">{{ tag }}</span>
+      }
+    </div>
+
+    <div class="detail-columns">
+      <div>
+        <h3>Ingredientes</h3>
+        <ul>
+          @for (ingredient of recipe.ingredients; track ingredient) {
+            <li>{{ ingredient }}</li>
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h3>Instrucciones</h3>
+        <ol>
+          @for (instruction of recipe.instructions; track instruction) {
+            <li>{{ instruction }}</li>
+          }
+        </ol>
+      </div>
+    </div>
+  </div>
+} @else {
+  <p>No se encontró la receta.</p>
+}

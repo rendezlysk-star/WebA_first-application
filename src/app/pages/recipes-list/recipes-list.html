@@ -1,0 +1,25 @@
+<p>recipes-list works!</p>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>NAME</th>
+    <th>DIFFICULTY</th>
+    <th>ACTIONS</th>
+  </tr>
+  @for (i of recipesList.recipes; track i.id) {
+    <tr>
+      <td>{{ i.id }}</td>
+      <td>{{ i.name }}</td>
+      <td>{{ i.difficulty }}</td>
+      <td>
+        <a [routerLink]="['/recipes-detail', i.id]">View details (from tag a) </a>
+        <button (click)="viewDetails(i.id)">View details (from function)</button>
+      </td>
+    </tr>
+  } @empty {
+    <tr>
+      <td colspan="4">No hay recetas disponibles.</td>
+    </tr>
+  }
+</table>
