@@ -1,0 +1,37 @@
+<div class="recipes-grid">
+  @for (recipe of recipesList.recipes; track recipe.id) {
+    <div class="card">
+      <img [src]="recipe.image" [alt]="recipe.name" />
+
+      <div class="content">
+        <h3>{{ recipe.id }} - {{ recipe.name }}</h3>
+
+        <div class="chips">
+          @for (tag of recipe.tags; track tag) {
+            <span>{{ tag }}</span>
+          }
+        </div>
+
+        <div class="columns">
+          <div>
+            <h4>Ingredientes</h4>
+            <ul>
+              @for (item of recipe.ingredients; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          </div>
+
+          <div>
+            <h4>Instrucciones</h4>
+            <ol>
+              @for (step of recipe.instructions; track step) {
+                <li>{{ step }}</li>
+              }
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>
