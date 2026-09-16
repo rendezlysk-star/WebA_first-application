@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-recipes-list',
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule],
   templateUrl: './recipes-list.html',
   styleUrl: './recipes-list.css',
 })
 export class RecipesList {
-  constructor(private router: Router) {}
+  filterType = 'Name';
+  _name = '';
+  _difficulty = '';
 
   recipesList = {
     recipes: [
@@ -1055,6 +1058,18 @@ export class RecipesList {
     skip: 0,
     limit: 30,
   };
+
+  _recipesListFilter = this.recipesList.recipes;
+
+  constructor(private router: Router) {}
+
+  filterRecipes() {
+    this._recipesListFilter = this.recipesList.recipes.filter((r) =>
+      this.filterType === 'Name'
+        ? r.name.toLowerCase().includes(this._name.trim().toLowerCase())
+        : r.difficulty.toLowerCase().includes(this._difficulty.trim().toLowerCase()),
+    );
+  }
 
   viewDetails(id: number) {
     this.router.navigate(['/recipes-detail', id]);
