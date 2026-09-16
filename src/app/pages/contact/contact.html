@@ -1,0 +1,25 @@
+<p>contact works!</p>
+<p>Nombre: {{ name }}</p>
+
+<button>{{ textButton }}</button>
+
+@for (i of data; track i.creditId) {
+  <article class="container">
+    <div class="item">
+      <h1>Perfil</h1>
+      <h3>Nombre: {{ i.firstName }} {{ i.secondName }} {{ i.surname }} {{ i.secondLastName }}</h3>
+      <p>Fecha de nacimiento: {{ i.birthdate }} ({{ getAge(i.birthdate) }} años)</p>
+      <p>Email: {{ i.email }}</p>
+    </div>
+    <div class="item">
+      <h1>Historial Crediticio</h1>
+      @for (item of i.creditHistory; track item.pastCreditId) {
+        <p>{{ getHelloWorld(item) }}</p>
+      } @empty {
+        <p>Sin historial crediticio</p>
+      }
+    </div>
+  </article>
+} @empty {
+  <p>Sin informacion</p>
+}
