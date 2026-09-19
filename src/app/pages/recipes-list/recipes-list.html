@@ -1,19 +1,17 @@
-<p>recipes-list works!</p>
-
 <section>
   <h3>Selección de filtros</h3>
 
   <label>
     Por nombre:
-    <input type="radio" name="filter" value="Name" [(ngModel)]="filterType" />
+    <input type="radio" name="filter" value="NAME" [(ngModel)]="filterType" />
   </label>
   <label>
     Por nivel de dificultad:
-    <input type="radio" name="filter" value="Difficulty" [(ngModel)]="filterType" />
+    <input type="radio" name="filter" value="DIFFICULTY" [(ngModel)]="filterType" />
   </label>
   <p>El tipo de filtro seleccionado es: {{ filterType }}</p>
 
-  @if (filterType === 'Name') {
+  @if (filterType === 'NAME') {
     <div>
       <label>
         Nombre a buscar:
@@ -23,7 +21,7 @@
     </div>
   }
 
-  @if (filterType === 'Difficulty') {
+  @if (filterType === 'DIFFICULTY') {
     <div>
       <label>
         Opciones de dificultad:
@@ -47,7 +45,7 @@
     <th>DIFFICULTY</th>
     <th>ACTIONS</th>
   </tr>
-  @for (i of _recipesListFilter; track i.id) {
+  @for (i of filterRecipesList; track i.id) {
     <tr>
       <td>{{ i.id }}</td>
       <td>{{ i.name }}</td>
@@ -55,6 +53,12 @@
       <td>
         <a [routerLink]="['/recipes-detail', i.id]">View details (from tag a) </a>
         <button (click)="viewDetails(i.id)">View details (from function)</button>
+        <a
+          [routerLink]="['/recipes-detail-v2']"
+          [queryParams]="{ name: i.name, difficulty: i.difficulty }"
+        >
+          View details (query params)
+        </a>
       </td>
     </tr>
   } @empty {

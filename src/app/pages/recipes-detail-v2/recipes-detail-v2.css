@@ -1,0 +1,38 @@
+.detail-card {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.detail-card img {
+  width: 100%;
+  border-radius: 6px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.chip {
+  background-color: #e0e0ff;
+  color: #333;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 0.85em;
+}
+
+.detail-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 15px;
+}
+
+.detail-columns > div {
+  flex: 1 1 250px;
+}
