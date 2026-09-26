@@ -13,20 +13,46 @@ export class RecipesList {
   filterType = 'NAME';
   _name = '';
   _difficulty = '';
-  activeQueryParams: any = { name: '' };
 
-  filterRecipesList = RECIPES_LIST_DATA.recipes;
+  recipesList = RECIPES_LIST_DATA;
+  _recipesListFilter = this.recipesList.recipes;
 
   constructor(private router: Router) {}
 
-  filterRecipes() {
-    const isName = this.filterType === 'NAME';
-    const query = isName ? { name: this._name } : { difficulty: this._difficulty };
+  get canFilter(): boolean {
+    if (this.filterType === 'NAME') {
+      return this._name.trim().length > 0;
+    }
+    if (this.filterType === 'DIFFICULTY') {
+      return this._difficulty.trim().length > 0;
+    }
+    return false;
+  }
 
-    this.router.navigate(['/recipes-detail-v2'], { queryParams: query });
+  filterRecipesList(): void {
+    const isName = this.filterType === 'NAME';
+    const name = this._name.trim().toLowerCase();
+    const diff = this._difficulty.trim().toLowerCase();
+
+    this._recipesListFilter = this.recipesList.recipes.filter((r) =>
+      isName ? r.name.toLowerCase().includes(name) : r.difficulty.toLowerCase().includes(diff),
+    );
+  }
+
+  filterRecipesListExternal(): void {
+    this.router.navigate(['/recipes-detail-v2'], {
+      queryParams:
+        this.filterType === 'NAME' ? { name: this._name } : { difficulty: this._difficulty },
+    });
   }
 
   viewDetails(id: number) {
     this.router.navigate(['/recipes-detail', id]);
+  }
+
+  viewDetailV2() {
+    this.router.navigate(['/recipes-detail-v2'], {
+      queryParams: this._name ? { name: this._name } : { difficulty: this._difficulty },
+    });
   }
 }

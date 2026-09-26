@@ -1,38 +1,83 @@
-.detail-card {
-  max-width: 700px;
-  margin: 20px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 16px;
+  padding: 16px;
 }
 
-.detail-card img {
+.card {
+  font-size: 16px; 
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.card img {
   width: 100%;
-  border-radius: 6px;
+  height: 170px;
+  object-fit: cover;
+  display: block;
+}
+
+.content {
+  padding: 14px;
+}
+
+.content h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.15em;
+  font-weight: 700;
 }
 
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin: 10px 0;
+  gap: 6px;
+  margin-bottom: 12px;
 }
 
-.chip {
-  background-color: #e0e0ff;
-  color: #333;
-  padding: 4px 10px;
-  border-radius: 16px;
-  font-size: 0.85em;
+.chips span {
+  background: #e5edff;
+  color: #2b50aa;
+  padding: 3px 10px;
+  border-radius: 14px;
+  font-size: 0.8em;
+  font-weight: 500;
 }
 
-.detail-columns {
+.columns {
   display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  margin-top: 15px;
+  gap: 14px;
+  font-size: 0.9em;
+  line-height: 1.45;
 }
 
-.detail-columns > div {
-  flex: 1 1 250px;
+.columns > div {
+  flex: 1;
+}
+
+.columns h4 {
+  margin: 0 0 6px 0;
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.columns ul,
+.columns ol {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.columns li {
+  margin-bottom: 4px;
+}
+
+@media (max-width: 500px) {
+  .columns {
+    flex-direction: column;
+    gap: 10px;
+  }
 }

@@ -1,5 +1,5 @@
 <section>
-  <h3>Selección de filtros</h3>
+  <h3>Selección de filtros - Local</h3>
 
   <label>
     Por nombre:
@@ -35,7 +35,14 @@
     </div>
   }
 
-  <button (click)="filterRecipes()">Filtrar</button>
+  <div class="filter-actions">
+    <button type="button" (click)="filterRecipesList()" [disabled]="!canFilter">
+      Filtro local
+    </button>
+    <button type="button" (click)="filterRecipesListExternal()" [disabled]="!canFilter">
+      Filtro externo
+    </button>
+  </div>
 </section>
 
 <table>
@@ -45,25 +52,30 @@
     <th>DIFFICULTY</th>
     <th>ACTIONS</th>
   </tr>
-  @for (i of filterRecipesList; track i.id) {
+  @for (i of _recipesListFilter; track i.id) {
     <tr>
       <td>{{ i.id }}</td>
       <td>{{ i.name }}</td>
       <td>{{ i.difficulty }}</td>
       <td>
-        <a [routerLink]="['/recipes-detail', i.id]">View details (from tag a) </a>
+        <a [routerLink]="['/recipes-detail', i.id]">View details (from tag a)</a>
         <button (click)="viewDetails(i.id)">View details (from function)</button>
+
         <a
           [routerLink]="['/recipes-detail-v2']"
-          [queryParams]="{ name: i.name, difficulty: i.difficulty }"
+          [queryParams]="_name ? { name: _name } : { difficulty: _difficulty }"
         >
           View details (query params)
         </a>
+
+        <button (click)="viewDetailV2()" [disabled]="!_name && !_difficulty">
+          View details (query params)
+        </button>
       </td>
     </tr>
   } @empty {
     <tr>
-      <td colspan="4">No se encontraron recetas con los filtros aplicados.</td>
+      <td colspan="4">No se encontraron datos</td>
     </tr>
   }
 </table>

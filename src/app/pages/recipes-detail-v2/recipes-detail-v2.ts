@@ -1,4 +1,4 @@
-import { Component, input, computed } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RECIPES_LIST_DATA } from '../../data/recipes-list-data';
 
@@ -9,18 +9,23 @@ import { RECIPES_LIST_DATA } from '../../data/recipes-list-data';
   styleUrl: './recipes-detail-v2.css',
 })
 export class RecipesDetailV2 {
-  name = input<string>('');
-  difficulty = input<string>('');
+  name = input<string>();
+  difficulty = input<string>();
+
+  recipesList = RECIPES_LIST_DATA;
 
   filterRecipesList = computed(() => {
-    const searchName = (this.name() || '').trim().toLowerCase();
-    const searchDiff = (this.difficulty() || '').trim().toLowerCase();
+    const name = this.name()?.toLowerCase() ?? '';
+    const difficulty = this.difficulty()?.toLowerCase() ?? '';
 
-    return RECIPES_LIST_DATA.recipes.filter((x) => {
-      const matchName = searchName ? x.name.toLowerCase().includes(searchName) : true;
-      const matchDiff = searchDiff ? x.difficulty.toLowerCase().includes(searchDiff) : true;
-
-      return matchName && matchDiff;
+    return this.recipesList.recipes.filter((x) => {
+      if (name) {
+        return x.name.toLowerCase().includes(name);
+      }
+      if (difficulty) {
+        return x.difficulty.toLowerCase().includes(difficulty);
+      }
+      return false;
     });
   });
 }

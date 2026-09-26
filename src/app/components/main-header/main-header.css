@@ -1,0 +1,19 @@
+header {
+    background-color: #e2e8f0;
+    color: white;
+    padding: 15px;
+}
+
+a {
+    margin: 4px;
+    padding: 4px;
+}
+
+a:hover {
+    background-color: gray;
+}
+
+a:focus {
+    background-color: #312e81;
+    color: white;
+}
