@@ -1,1 +1,27 @@
-<p>users-list works!</p>
+<h2>Usuarios y Publicaciones</h2>
+
+<div class="users-container">
+  @for (user of users; track user.id) {
+    <div class="user-card">
+      <div class="user-header">
+        <h3>{{ user.id }} - {{ user.firstName }} {{ user.lastName }}</h3>
+        <p class="user-meta"><strong>Usuario:</strong> {{ user.username }}</p>
+        <p class="user-meta"><strong>Correo:</strong> {{ user.email }}</p>
+      </div>
+
+      <div class="posts-section">
+        <h4>Publicaciones</h4>
+        <div class="posts-list">
+          @for (post of getUserPosts(user.id); track post.id) {
+            <div class="post-item">
+              <h5 class="post-title">{{ post.id }} - {{ post.title }}</h5>
+              <p class="post-body">{{ post.body }}</p>
+            </div>
+          } @empty {
+            <p class="no-posts">Este usuario no tiene publicaciones registradas.</p>
+          }
+        </div>
+      </div>
+    </div>
+  }
+</div>
